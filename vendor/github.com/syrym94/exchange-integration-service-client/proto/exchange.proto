@@ -1,0 +1,193 @@
+syntax = "proto3";
+
+package exchange;
+
+option go_package = "/proto";
+
+service ExchangeService {
+  rpc GetTrades(GetTradesRequest) returns (GetTradesResponse);
+  rpc GetWalletBalance(GetWalletBalanceRequest) returns (GetWalletBalanceResponse);
+  rpc StreamTickerData(TickerRequest) returns (stream TickerResponse);
+  rpc GetSubDepositAddress(GetSubDepositAddressRequest) returns (GetSubDepositAddressResponse);
+  rpc GetAccountCoinsBalance(AccountCoinsBalanceRequest) returns (AccountCoinsBalanceResponse);
+  rpc GetWithdrawalRecords(WithdrawalRecordsRequest) returns (WithdrawalRecordsResponse);
+  rpc GetWithdrawableAmount(WithdrawableAmountRequest) returns (WithdrawableAmountResponse);
+  rpc CreateWithdrawal(CreateWithdrawalRequest) returns (CreateWithdrawalResponse);
+}
+
+message GetTradesRequest {
+  string exchange = 1;
+}
+
+message Trade {
+  string id = 1;
+  double price = 2;
+  double quantity = 3;
+  string symbol = 4;
+  int64 time = 5;
+}
+
+message GetTradesResponse {
+  repeated Trade trades = 1;
+}
+
+message GetWalletBalanceRequest {
+  string exchange = 1;
+  string accountType = 2;
+}
+
+message WalletBalanceCoin {
+  string availableToBorrow = 1;
+  string bonus = 2;
+  string accruedInterest = 3;
+  string availableToWithdraw = 4;
+  string totalOrderIM = 5;
+  string equity = 6;
+  string totalPositionMM = 7;
+  string usdValue = 8;
+  string unrealisedPnl = 9;
+  bool collateralSwitch = 10;
+  string spotHedgingQty = 11;
+  string borrowAmount = 12;
+  string totalPositionIM = 13;
+  string walletBalance = 14;
+  string cumRealisedPnl = 15;
+  string locked = 16;
+  bool marginCollateral = 17;
+  string coin = 18;
+}
+
+message WalletBalanceList {
+  string totalEquity = 1;
+  string accountIMRate = 2;
+  string totalMarginBalance = 3;
+  string totalInitialMargin = 4;
+  string accountType = 5;
+  string totalAvailableBalance = 6;
+  string accountMMRate = 7;
+  string totalPerpUPL = 8;
+  string totalWalletBalance = 9;
+  string accountLTV = 10;
+  string totalMaintenanceMargin = 11;
+  repeated WalletBalanceCoin coin = 12;
+}
+
+message WalletBalanceResponse {
+  CommonResponse commonResponse = 1;
+  repeated WalletBalanceList list = 2;
+}
+
+message GetWalletBalanceResponse {
+  WalletBalanceResponse balance = 1;
+}
+
+message TickerRequest {
+  string exchange = 1;
+  string tickerSymbol = 2;
+}
+
+message TickerResponse {
+  string data = 1;
+}
+
+message GetSubDepositAddressRequest {
+  string coin = 1;
+  string chainType = 2;
+  string subMemberId = 3;
+  string exchange = 4;
+}
+
+message GetSubDepositAddressResponse {
+  string address = 1;
+  string tag = 2;
+}
+
+message AccountCoinsBalanceRequest {
+  string memberId = 1;
+  string accountType = 2;
+  string coin = 3;
+  int64 withBonus = 4;
+  string exchange = 5;
+}
+
+message AccountCoinsBalanceResponse {
+  repeated CoinBalance coinBalances = 1;
+}
+
+message CoinBalance {
+  string coin = 1;
+  string walletBalance = 2;
+  string transferBalance = 3;
+  string bonus = 4;
+}
+
+message WithdrawalRecordsRequest {
+  string exchange = 1;
+  string coin = 2;
+  string withdrawId = 3;
+  int32 withdrawType = 4;
+  int64 startTime = 5;
+  int64 endTime = 6;
+  int32 limit = 7;
+  string cursor = 8;
+}
+
+message WithdrawalRecord {
+  string coin = 1;
+  string chain = 2;
+  string amount = 3;
+  string txID = 4;
+  string status = 5;
+  string toAddress = 6;
+  string tag = 7;
+  string withdrawFee = 8;
+  string createTime = 9;
+  string updateTime = 10;
+  string withdrawId = 11;
+  int32 withdrawType = 12;
+}
+
+
+message WithdrawalRecordsResponse {
+  CommonResponse commonResponse = 1;
+  repeated WithdrawalRecord rows = 2;
+  string nextPageCursor = 3;
+}
+
+message CommonResponse {
+  int32 retCode = 1;
+  string retMsg = 2;
+  string time = 3;
+}
+
+message WithdrawableAmountRequest {
+  string exchange = 1;
+  string coin = 2;
+}
+
+message WithdrawableAmount {
+  string coin = 1;
+  string withdrawableAmount = 2;
+  string availableBalance = 3;
+}
+
+message WithdrawableAmountResponse {
+  string limitAmountUsd = 1;
+  map<string, WithdrawableAmount> withdrawableAmounts = 2;
+}
+
+message CreateWithdrawalRequest {
+  string coin = 1;
+  string chain = 2;
+  string address = 3;
+  string tag = 4;
+  string amount = 5;
+  int64 timestamp = 6;
+  int32 forceChain = 7;
+  string accountType = 8;
+  string exchange = 9;
+}
+
+message CreateWithdrawalResponse {
+  string id = 1;
+}

@@ -1,0 +1,60 @@
+exchange-integration-service/
+├── cmd/
+│   └── main.go
+├── internal/
+│   ├── api/
+│   │   └── grpc/
+│   │          └── binance/
+│   │              └── binance_grpc.go
+│   │          └── bybit/
+│   │              └── bybit_grpc.go
+│   │   │      └── server.go
+│   │   ├── http/
+│   │          └── binance/
+│   │              └── binance_http.go
+│   │          └── bybit/
+│   │              └── bybit_http.go
+│   │   │      └── server.go
+│   ├── config/
+│   │   └── config.go
+│   ├── models/
+│   │   └── model.go
+│   ├── services/
+│   │   ├── binance/
+│   │   │   └── binance_service.go
+│   │   ├── bybit/
+│   │   │   └── bybit_service.go
+│   │   └── service.go
+│   ├── utils/
+│   │   └── utils.go
+├── config.yaml
+├── Dockerfile
+├── go.mod
+├── go.sum
+└── README.md
+
+
+/v5/asset/deposit/query-sub-member-address
+/v5/asset/transfer/query-account-coins-balance
+/v5/asset/withdraw/query-record
+/v5/asset/withdraw/withdrawable-amount
+/v5/asset/withdraw/create
+/v5/asset/deposit/query-sub-member-record
+/v5/asset/deposit/query-address
+/v5/asset/coin/query-info
+/v5/account/wallet-balance
+/v5/market/instruments-info
+/v5/market/orderbook
+/v5/market/tickers
+/v5/order/create
+/v5/order/history
+/v5/user/create-sub-member
+/v5/user/create-sub-api
+/v5/user/query-api
+/v5/user/sub-apikeys
+/v5/user/get-member-type
+/v5/user/del-submember
+/v5/user/delete-api
+/v5/user/delete-sub-api
+
+
