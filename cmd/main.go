@@ -1,14 +1,14 @@
 package main
 
 import (
-	handlers "exchange-integration-service/internal/api/http"
-	"exchange-integration-service/internal/config"
+	grpc_server "github.com/syrym94/exchange-integration-service/internal/api/grpc"
+	handlers "github.com/syrym94/exchange-integration-service/internal/api/http"
+	"github.com/syrym94/exchange-integration-service/internal/config"
 
 	"github.com/gorilla/mux"
 
 	"log"
 	"net/http"
-	grpcServer "github.com/syrym94/exchange-integration-service-client"
 )
 
 func main() {
@@ -30,5 +30,5 @@ func main() {
 	}()
 
 	// Start the gRPC server
-	grpcServer.StartGRPCServer(":50051")
+	grpc_server.StartGRPCServer(cfg.GrpcAddress, cfg)
 }

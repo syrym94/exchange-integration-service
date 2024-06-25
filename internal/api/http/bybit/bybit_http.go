@@ -2,10 +2,10 @@ package bybit
 
 import (
 	"encoding/json"
-	"exchange-integration-service/internal/config"
-	"exchange-integration-service/internal/models"
-	"exchange-integration-service/internal/utils"
 	"fmt"
+	"github.com/syrym94/exchange-integration-service/internal/config"
+	"github.com/syrym94/exchange-integration-service/internal/models"
+	"github.com/syrym94/exchange-integration-service/internal/utils"
 )
 
 func GetBybitTrades(cfg *config.Config) ([]models.Trade, error) {

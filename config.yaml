@@ -1,12 +1,15 @@
 server_address: ":8080"
+grpc_address: ":4000"
 
 binance_api_key: "your_binance_api_key"
 binance_secret: "your_binance_secret"
 binance_api_endpoint: "https://api.binance.com/api/v3"
 
-bybit_api_key: "your_bybit_api_key"
-bybit_secret: "your_bybit_secret"
-bybit_api_endpoint: "https://api.bybit.com/v2/public"
+bybit_api_key: "UeS4rGmybdtJvz4jdn"
+bybit_secret: "G1EM4kGhre6IFi2dBluQxiAtv0BOcJuBhepm"
+bybit_api_endpoint: "https://api-testnet.bybit.com"
+bybit_ws_endpoint: "wss://stream-testnet.bybit.com/v5/public/spot"
+bybit_subacc: "101538826"
 
 okex_api_key: "your_okex_api_key"
 okex_secret: "your_okex_secret"

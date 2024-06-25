@@ -6,16 +6,15 @@ import (
 )
 
 type Config struct {
-	ServerAddress      string
-	BinanceAPIKey      string
-	BinanceSecret      string
-	BinanceAPIEndpoint string
-	BybitAPIKey        string
-	BybitSecret        string
-	BybitAPIEndpoint   string
-	OkexAPIKey         string
-	OkexSecret         string
-	OkexAPIEndpoint    string
+	ServerAddress      string `mapstructure:"server_address"`
+	GrpcAddress        string `mapstructure:"grpc_address"`
+	BinanceAPIKey      string `mapstructure:"binance_api_key"`
+	BinanceSecret      string `mapstructure:"binance_secret"`
+	BinanceAPIEndpoint string `mapstructure:"binance_api_endpoint"`
+	BybitAPIKey        string `mapstructure:"bybit_api_key"`
+	BybitSecret        string `mapstructure:"bybit_secret"`
+	BybitAPIEndpoint   string `mapstructure:"bybit_api_endpoint"`
+	BybitWSEndpoint    string `mapstructure:"bybit_ws_endpoint"`
 }
 
 func LoadConfig() *Config {
