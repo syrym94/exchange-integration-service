@@ -40,12 +40,12 @@ exchange-integration-service/
 /v5/asset/withdraw/withdrawable-amount
 /v5/asset/withdraw/create
 /v5/asset/deposit/query-sub-member-record
+/v5/account/wallet-balance
+/v5/market/tickers
 /v5/asset/deposit/query-address
 /v5/asset/coin/query-info
-/v5/account/wallet-balance
 /v5/market/instruments-info
 /v5/market/orderbook
-/v5/market/tickers
 /v5/order/create
 /v5/order/history
 /v5/user/create-sub-member

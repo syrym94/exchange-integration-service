@@ -187,13 +187,46 @@ func (s *BybitGRPC) GetWithdrawableAmount(ctx context.Context, req *proto.Withdr
 }
 
 func (s *BybitGRPC) CreateWithdrawal(ctx context.Context, req *proto.CreateWithdrawalRequest) (*proto.CreateWithdrawalResponse, error) {
-	res, err := s.service.CreateWithdrawal(req.Exchange, req.Coin, req.Chain, req.Address, req.Tag, req.AccountType, req.Amount, req.Timestamp, req.ForceChain, s.cfg)
+	res, err := s.service.CreateWithdrawal(req.Coin, req.Chain, req.Address, req.Tag, req.AccountType, req.Amount, req.Timestamp, req.ForceChain, s.cfg)
 	if err != nil {
 		return nil, err
 	}
 
 	return &proto.CreateWithdrawalResponse{
 		Id: res,
+	}, nil
+}
+
+func (s *BybitGRPC) GetSubDepositRecords(ctx context.Context, req *proto.SubDepositRecordsRequest) (*proto.SubDepositRecordsResponse, error) {
+	res, err := s.service.GetSubDepositRecords(req.SubMemberId, req.Coin, req.Cursor, req.Limit, req.StartTime, req.EndTime, s.cfg)
+	if err != nil {
+		return nil, err
+	}
+
+	var grpcDepositRecords []*proto.SubMemberDepositRecord
+	for _, record := range res.Result.Rows {
+		grpcDepositRecords = append(grpcDepositRecords, &proto.SubMemberDepositRecord{
+			Coin:              record.Coin,
+			Chain:             record.Chain,
+			Amount:            record.Amount,
+			TxID:              record.TxID,
+			Status:            record.Status,
+			ToAddress:         record.ToAddress,
+			Tag:               record.Tag,
+			DepositFee:        record.DepositFee,
+			CreateTime:        record.CreateTime,
+			UpdateTime:        record.UpdateTime,
+			DepositId:         record.DepositFee,
+			Confirmations:     record.Confirmations,
+			TxIndex:           record.TxIndex,
+			BlockHash:         record.BlockHash,
+			BatchReleaseLimit: record.BatchReleaseLimit,
+			DepositType:       record.DepositType,
+		})
+	}
+
+	return &proto.SubDepositRecordsResponse{
+		Rows: grpcDepositRecords,
 	}, nil
 }
 

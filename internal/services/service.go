@@ -12,6 +12,7 @@ type ExchangeServicer interface {
 	GetSubDepositAddress(coin, chainType, subMemberId string, cfg *config.Config) (*models.DepositAddressResponse, error)
 	GetAccountCoinsBalance(memberId, accountType, coin string, withBonus int, cfg *config.Config) (*models.AccountCoinBalance, error)
 	GetWithdrawalRecords(coin, withdrawId, cursor string, withdrawType, limit int32, startTime, endTime int64, cfg *config.Config) (*models.WithdrawalRecords, error)
+	GetSubDepositRecords(subMemberId, coin, cursor string, limit int32, startTime, endTime int64, cfg *config.Config) (*models.DepositRecords, error)
 	GetWithdrawableAmount(coin string, cfg *config.Config) (*models.WithdrawableAmount, error)
 	CreateWithdrawal(coin, chain, address, tag, accountType, amount string, timestamp int64, forceChain int32, cfg *config.Config) (string, error)
 }
@@ -83,4 +84,12 @@ func (s *Service) CreateWithdrawal(exchange, coin, chain, address, tag, accountT
 		return "", fmt.Errorf("unsupported exchange: %s", exchange)
 	}
 	return service.CreateWithdrawal(coin, chain, address, tag, accountType, amount, timestamp, forceChain, cfg)
+}
+
+func (s *Service) GetSubDepositRecords(exchange, subMemberId, coin, cursor string, limit int32, startTime, endTime int64, cfg *config.Config) (*models.DepositRecords, error) {
+	service, ok := s.exchanges[exchange]
+	if !ok {
+		return nil, fmt.Errorf("unsupported exchange: %s", exchange)
+	}
+	return service.GetSubDepositRecords(subMemberId, coin, cursor, limit, startTime, endTime, cfg)
 }

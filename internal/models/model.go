@@ -87,18 +87,49 @@ type WithdrawalRecords struct {
 	CommonResponse
 	Result struct {
 		Rows []struct {
-			Coin         string `json:"coin"`
-			Chain        string `json:"chain"`
-			Amount       string `json:"amount"`
-			TxID         string `json:"txID"`
-			Status       string `json:"status"`
-			ToAddress    string `json:"toAddress"`
-			Tag          string `json:"tag"`
-			WithdrawFee  string `json:"withdrawFee"`
-			CreateTime   string `json:"createTime"`
-			UpdateTime   string `json:"updateTime"`
-			WithdrawID   string `json:"withdrawId"`
-			WithdrawType int    `json:"withdrawType"`
+			Coin              string `json:"coin"`
+			Chain             string `json:"chain"`
+			Amount            string `json:"amount"`
+			TxID              string `json:"txID"`
+			Status            string `json:"status"`
+			ToAddress         string `json:"toAddress"`
+			Tag               string `json:"tag"`
+			WithdrawFee       string `json:"withdrawFee"`
+			CreateTime        string `json:"createTime"`
+			UpdateTime        string `json:"updateTime"`
+			WithdrawID        string `json:"withdrawId"`
+			WithdrawType      int    `json:"withdrawType"`
+			Confirmations     string `json:"confirmations"`
+			TxIndex           string `json:"txIndex"`
+			BlockHash         string `json:"blockHash"`
+			BatchReleaseLimit string `json:"batchReleaseLimit"`
+			DepositType       string `json:"depositType"`
+		} `json:"rows"`
+		NextPageCursor string `json:"nextPageCursor"`
+	} `json:"result"`
+}
+
+type DepositRecords struct {
+	CommonResponse
+	Result struct {
+		Rows []struct {
+			Coin              string `json:"coin"`
+			Chain             string `json:"chain"`
+			Amount            string `json:"amount"`
+			TxID              string `json:"txID"`
+			Status            string `json:"status"`
+			ToAddress         string `json:"toAddress"`
+			Tag               string `json:"tag"`
+			DepositFee        string `json:"withdrawFee"`
+			CreateTime        string `json:"createTime"`
+			UpdateTime        string `json:"updateTime"`
+			WithdrawID        string `json:"withdrawId"`
+			WithdrawType      int    `json:"withdrawType"`
+			Confirmations     string `json:"confirmations"`
+			TxIndex           string `json:"txIndex"`
+			BlockHash         string `json:"blockHash"`
+			BatchReleaseLimit string `json:"batchReleaseLimit"`
+			DepositType       string `json:"depositType"`
 		} `json:"rows"`
 		NextPageCursor string `json:"nextPageCursor"`
 	} `json:"result"`

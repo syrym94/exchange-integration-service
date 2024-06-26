@@ -89,3 +89,12 @@ func (ec *ExchangeClient) CreateWithdrawal(exchange, coin, chain, address, tag, 
 	}
 	return res, err
 }
+
+func (ec *ExchangeClient) GetSubWithdrawalRecords(exchange, subMemberId, coin, cursor string, limit int32, startTime, endTime int64) (*proto.SubDepositRecordsResponse, error) {
+	req := &proto.SubDepositRecordsRequest{Exchange: exchange, SubMemberId: subMemberId, Coin: coin, Cursor: cursor, Limit: limit, StartTime: startTime, EndTime: endTime}
+	res, err := ec.client.GetSubDepositRecords(context.Background(), req)
+	if err != nil {
+		return nil, err
+	}
+	return res, err
+}

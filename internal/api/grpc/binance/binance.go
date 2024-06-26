@@ -13,6 +13,16 @@ type BinanceGRPC struct {
 	cfg     *config.Config
 }
 
+func (s *BinanceGRPC) GetSubDepositRecords(ctx context.Context, req *proto.SubDepositRecordsRequest) (*proto.SubDepositRecordsResponse, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
+func (s *BinanceGRPC) CreateWithdrawal(ctx context.Context, req *proto.CreateWithdrawalRequest) (*proto.CreateWithdrawalResponse, error) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (s *BinanceGRPC) GetWithdrawableAmount(ctx context.Context, req *proto.WithdrawableAmountRequest) (*proto.WithdrawableAmountResponse, error) {
 	//TODO implement me
 	panic("implement me")

@@ -30,6 +30,8 @@ type ExchangeGrpcServer interface {
 	GetAccountCoinsBalance(ctx context.Context, req *proto.AccountCoinsBalanceRequest) (*proto.AccountCoinsBalanceResponse, error)
 	GetWithdrawalRecords(ctx context.Context, req *proto.WithdrawalRecordsRequest) (*proto.WithdrawalRecordsResponse, error)
 	GetWithdrawableAmount(ctx context.Context, req *proto.WithdrawableAmountRequest) (*proto.WithdrawableAmountResponse, error)
+	CreateWithdrawal(ctx context.Context, req *proto.CreateWithdrawalRequest) (*proto.CreateWithdrawalResponse, error)
+	GetSubDepositRecords(ctx context.Context, req *proto.SubDepositRecordsRequest) (*proto.SubDepositRecordsResponse, error)
 }
 
 func NewServer(cfg *config.Config) *Server {
@@ -72,6 +74,14 @@ func (s *Server) GetWithdrawalRecords(ctx context.Context, req *proto.Withdrawal
 
 func (s *Server) GetWithdrawableAmount(ctx context.Context, req *proto.WithdrawableAmountRequest) (*proto.WithdrawableAmountResponse, error) {
 	return s.exchanges[req.Exchange].GetWithdrawableAmount(ctx, req)
+}
+
+func (s *Server) CreateWithdrawal(ctx context.Context, req *proto.CreateWithdrawalRequest) (*proto.CreateWithdrawalResponse, error) {
+	return s.exchanges[req.Exchange].CreateWithdrawal(ctx, req)
+}
+
+func (s *Server) GetSubDepositRecords(ctx context.Context, req *proto.SubDepositRecordsRequest) (*proto.SubDepositRecordsResponse, error) {
+	return s.exchanges[req.Exchange].GetSubDepositRecords(ctx, req)
 }
 
 func StartGRPCServer(port string, cfg *config.Config) {

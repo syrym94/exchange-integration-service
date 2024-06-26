@@ -52,7 +52,7 @@ func MakeBybitAuthenticatedRequest(method, endpoint, apiKey, apiSecret string, p
 	recvWindow := "20000"
 
 	var payload string
-	var body *bytes.Buffer
+	body := new(bytes.Buffer)
 
 	if method == http.MethodGet {
 		query := url.Values{}
@@ -60,7 +60,6 @@ func MakeBybitAuthenticatedRequest(method, endpoint, apiKey, apiSecret string, p
 			query.Add(key, fmt.Sprintf("%v", value))
 		}
 		payload = timestamp + apiKey + recvWindow + query.Encode()
-		body = nil
 	} else {
 		jsonBody, err := json.Marshal(params)
 		if err != nil {

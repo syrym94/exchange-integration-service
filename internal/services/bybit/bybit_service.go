@@ -131,8 +131,8 @@ func (s *BybitService) GetWithdrawableAmount(coin string, cfg *config.Config) (*
 	return &response, nil
 }
 
-func (s *BybitService) CreateWithdrawal(exchange, coin, chain, address, tag, accountType, amount string, timestamp int64, forceChain int32, cfg *config.Config) (string, error) {
-	url := fmt.Sprintf("%s/v5/asset/withdraw/withdrawable-amount", cfg.BybitAPIEndpoint)
+func (s *BybitService) CreateWithdrawal(coin, chain, address, tag, accountType, amount string, timestamp int64, forceChain int32, cfg *config.Config) (string, error) {
+	url := fmt.Sprintf("%s/v5/asset/withdraw/create", cfg.BybitAPIEndpoint)
 	params := map[string]interface{}{
 		"coin":        coin,
 		"chain":       chain,
@@ -155,4 +155,28 @@ func (s *BybitService) CreateWithdrawal(exchange, coin, chain, address, tag, acc
 	}
 
 	return response, nil
+}
+
+func (s *BybitService) GetSubDepositRecords(subMemberId, coin, cursor string, limit int32, startTime, endTime int64, cfg *config.Config) (*models.DepositRecords, error) {
+	url := fmt.Sprintf("%s/v5/asset/deposit/query-sub-member-record", cfg.BybitAPIEndpoint)
+	params := map[string]interface{}{
+		"coin":        coin,
+		"cursor":      cursor,
+		"subMemberId": subMemberId,
+		"limit":       strconv.Itoa(int(limit)),
+		"startTime":   strconv.Itoa(int(startTime)),
+		"endTime":     strconv.Itoa(int(endTime)),
+	}
+	body, err := utils.MakeBybitAuthenticatedRequest(http.MethodGet, url, cfg.BybitAPIKey, cfg.BybitSecret, params)
+	if err != nil {
+		return nil, err
+	}
+	log.Println(string(body))
+
+	var response models.DepositRecords
+	if err := json.Unmarshal(body, &response); err != nil {
+		return nil, fmt.Errorf("could not unmarshal response: %v", err)
+	}
+
+	return &response, nil
 }

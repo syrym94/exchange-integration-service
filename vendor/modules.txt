@@ -73,7 +73,7 @@ github.com/spf13/viper/internal/features
 # github.com/subosito/gotenv v1.6.0
 ## explicit; go 1.18
 github.com/subosito/gotenv
-# github.com/syrym94/exchange-integration-service-client v0.0.0-20240625123109-0c0b2598f7fb
+# github.com/syrym94/exchange-integration-service-client v0.0.0-20240626080547-690ebffa7163
 ## explicit; go 1.22.4
 github.com/syrym94/exchange-integration-service-client
 github.com/syrym94/exchange-integration-service-client/grpc

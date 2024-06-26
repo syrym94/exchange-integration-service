@@ -13,6 +13,7 @@ service ExchangeService {
   rpc GetWithdrawalRecords(WithdrawalRecordsRequest) returns (WithdrawalRecordsResponse);
   rpc GetWithdrawableAmount(WithdrawableAmountRequest) returns (WithdrawableAmountResponse);
   rpc CreateWithdrawal(CreateWithdrawalRequest) returns (CreateWithdrawalResponse);
+  rpc GetSubDepositRecords(SubDepositRecordsRequest) returns (SubDepositRecordsResponse);
 }
 
 message GetTradesRequest {
@@ -190,4 +191,39 @@ message CreateWithdrawalRequest {
 
 message CreateWithdrawalResponse {
   string id = 1;
+}
+
+message SubMemberDepositRecord {
+  string coin = 1;
+  string chain = 2;
+  string amount = 3;
+  string txID = 4;
+  string status = 5;
+  string toAddress = 6;
+  string tag = 7;
+  string depositFee = 8;
+  string createTime = 9;
+  string updateTime = 10;
+  string depositId = 11;
+  string confirmations = 12;
+  string txIndex = 13;
+  string blockHash = 14;
+  string batchReleaseLimit = 15;
+  string depositType = 16;
+}
+
+message SubDepositRecordsResponse {
+  CommonResponse commonResponse = 1;
+  string nextPageCursor = 2;
+  repeated SubMemberDepositRecord rows = 3;
+}
+
+message SubDepositRecordsRequest {
+  string subMemberId = 1;
+  string coin = 2;
+  string exchange = 3;
+  int64 startTime = 5;
+  int64 endTime = 6;
+  int32 limit = 7;
+  string cursor = 8;
 }

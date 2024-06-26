@@ -6,7 +6,7 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/websocket v1.5.3
 	github.com/spf13/viper v1.19.0
-	github.com/syrym94/exchange-integration-service-client v0.0.0-20240625123109-0c0b2598f7fb
+	github.com/syrym94/exchange-integration-service-client v0.0.0-20240626080547-690ebffa7163
 	google.golang.org/grpc v1.64.0
 )
 
